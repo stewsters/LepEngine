@@ -11,6 +11,9 @@ public class Bullet {
 	public float xVel;
 	public float yVel;
 	
+	public float xDrag;
+	public float yDrag;
+	
 	public Bullet(float xP,float yP, float velocity, float xVelUnscaled, float yVelUnscaled){
 		
 		//get distance squared
@@ -23,7 +26,7 @@ public class Bullet {
 		yPos = yP;
 	}
 	
-	//TODO: keep  
+	//TODO: keep old position for bullet drag
 	public void render(PApplet context)
 	{
 		context.rect(xPos, yPos, 1, 1);
@@ -32,6 +35,9 @@ public class Bullet {
 	//TODO: check for collision
 	public void update()
 	{
+		xDrag = xPos;
+		yDrag = yPos;
+		
 		xPos += xVel;
 		yPos += yVel;
 	}

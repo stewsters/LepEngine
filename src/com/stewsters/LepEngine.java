@@ -1,16 +1,20 @@
 package com.stewsters;
 
 import java.util.ArrayList;
+
+import com.stewsters.weapons.Pistol;
+
 import processing.core.PApplet;
 
 public class LepEngine extends PApplet{
 
-	Person me;
-	ArrayList<Bullet> bullets;
+	public static Person me;
+	public static ArrayList<Bullet> bullets;
 	
 	public void setup(){
 		size(200,200);
 		me = new Person();
+		me.weapon = new Pistol();
 		bullets = new ArrayList<Bullet>();
 		
 	}
@@ -78,13 +82,19 @@ public class LepEngine extends PApplet{
 	
 		//Find trajectory and make a projectile
 		public void mousePressed() {
-		  float xDiff = (float)mouseX - me.xPos;
-		  float yDiff = (float)mouseY - me.yPos;
-		 
-		  Bullet bullet = new Bullet(me.xPos,me.yPos,5.f,xDiff,yDiff);
-		  bullets.add(bullet);
-		  
-		  //spawn a bullet 1 unit in front of use traveling in the direction specified by the click
+			
+			if(me.weapon != null)
+			{
+				me.weapon.click(me, mouseX, mouseY);
+			}
+			
+		}
+		
+		public void mouseReleased(){
+			if(me.weapon != null)
+			{
+				me.weapon.unclick(me, mouseX, mouseY);
+			}
 		}
 
 		
