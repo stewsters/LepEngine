@@ -13,17 +13,23 @@ public class Bullet {
 	
 	public float xDrag;
 	public float yDrag;
-	
-	public Bullet(float xP,float yP, float velocity, float xVelUnscaled, float yVelUnscaled){
+
+    public float rangeTraveled;
+	public float maxRange;
+
+	public Bullet(float xP,float yP, float velocity, float xVelUnscaled, float yVelUnscaled,float maximumRange){
 		
 		//get distance squared
 		float innateDistance = (float) Math.sqrt((xVelUnscaled * xVelUnscaled) + (yVelUnscaled * yVelUnscaled));
-		float multiplier = bulletVelocity / innateDistance;
-		
+		float multiplier = velocity / innateDistance;
+		bulletVelocity = velocity;
+
 		xVel = multiplier * xVelUnscaled;
 		yVel = multiplier * yVelUnscaled;
 		xPos = xP;
 		yPos = yP;
+        rangeTraveled = 0;
+        maxRange = maximumRange;
 	}
 	
 	//TODO: keep old position for bullet drag
@@ -40,5 +46,12 @@ public class Bullet {
 		
 		xPos += xVel;
 		yPos += yVel;
+
+        rangeTraveled += bulletVelocity;
 	}
+
+    public boolean isGarbage(){
+        return (rangeTraveled > maxRange );
+
+    }
 }
