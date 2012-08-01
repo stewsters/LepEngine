@@ -18,7 +18,7 @@ public class Pistol implements Weapon {
 		  float xDiff = (float)xClick - holder.xPos;
 		  float yDiff = (float)yClick - holder.yPos;
 		 
-		  Bullet bullet = new Bullet(holder.xPos,holder.yPos,5.f,xDiff,yDiff, 100.f);
+		  Bullet bullet = new Bullet(holder.xPos,holder.yPos,5.f,xDiff,yDiff, 50.f);
 		  LepEngine.bullets.add(bullet);
 
         //remove a bullet from the clip

@@ -39,7 +39,7 @@ public class Bullet {
 	}
 	
 	//TODO: check for collision
-	public void update()
+	public boolean update()
 	{
 		xDrag = xPos;
 		yDrag = yPos;
@@ -48,10 +48,7 @@ public class Bullet {
 		yPos += yVel;
 
         rangeTraveled += bulletVelocity;
+        return (rangeTraveled > maxRange );
 	}
 
-    public boolean isGarbage(){
-        return (rangeTraveled > maxRange );
-
-    }
 }

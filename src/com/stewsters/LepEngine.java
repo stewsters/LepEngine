@@ -4,6 +4,7 @@ import com.stewsters.weapons.Pistol;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class LepEngine extends PApplet {
 
@@ -23,10 +24,13 @@ public class LepEngine extends PApplet {
 
         //Updates
         me.update();
-        for (Bullet bullet : bullets) {
-            bullet.update();
-                //remove bullet.  probably need a cleanup
+
+        Iterator<Bullet> iterator = bullets.iterator();
+        while (iterator.hasNext()){
+            if(iterator.next().update())
+                iterator.remove();
         }
+
 
         //Renders
         me.render(this);
@@ -35,6 +39,7 @@ public class LepEngine extends PApplet {
         }
 
         //we need to loop over and delete bullet.isGarbage()
+
 
     }
 
