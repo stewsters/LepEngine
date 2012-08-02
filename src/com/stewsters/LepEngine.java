@@ -24,6 +24,8 @@ public class LepEngine extends PApplet {
 
         //Updates
         me.update();
+        if(mousePressed)
+            me.weapon.click(me,mouseX,mouseY);
 
         Iterator<Bullet> iterator = bullets.iterator();
         while (iterator.hasNext()){
@@ -37,9 +39,6 @@ public class LepEngine extends PApplet {
         for (Bullet bullet : bullets) {
             bullet.render(this);
         }
-
-        //we need to loop over and delete bullet.isGarbage()
-
 
     }
 
@@ -73,20 +72,20 @@ public class LepEngine extends PApplet {
     }
 
 
-    //Find trajectory and make a projectile
-    public void mousePressed() {
-
-        if (me.weapon != null) {
-            me.weapon.click(me, mouseX, mouseY);
-        }
-
-    }
-
-    public void mouseReleased() {
-        if (me.weapon != null) {
-            me.weapon.unclick(me, mouseX, mouseY);
-        }
-    }
+//    //Find trajectory and make a projectile
+//    public void mousePressed() {
+//
+//        if (me.weapon != null) {
+//            me.weapon.click(me, mouseX, mouseY);
+//        }
+//
+//    }
+//
+//    public void mouseReleased() {
+//        if (me.weapon != null) {
+//            me.weapon.unclick(me, mouseX, mouseY);
+//        }
+//    }
 
 
 
