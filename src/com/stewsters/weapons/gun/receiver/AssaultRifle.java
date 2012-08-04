@@ -1,9 +1,10 @@
-package com.stewsters.weapons.gun;
+package com.stewsters.weapons.gun.receiver;
 
 import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
 import com.stewsters.weapons.Weapon;
+import com.stewsters.weapons.gun.Gun;
 import com.stewsters.weapons.gun.attachment.Magazine;
 
 public class AssaultRifle extends Gun implements Weapon {
