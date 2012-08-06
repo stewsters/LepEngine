@@ -3,8 +3,6 @@ package com.stewsters.weapons.gun.receiver;
 
 import com.stewsters.weapons.gun.attachment.Magazine;
 
-//TODO: add da, sa, and da/sa triggers
-// sa
 public class Automatic implements Receiver {
 
     boolean cocked = false;
