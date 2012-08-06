@@ -4,7 +4,9 @@ import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
 import com.stewsters.weapons.gun.attachment.Magazine;
+import com.stewsters.weapons.gun.receiver.Automatic;
 import com.stewsters.weapons.gun.receiver.Receiver;
+import com.stewsters.weapons.gun.receiver.SemiAutomatic;
 
 abstract public class Gun {
 
@@ -19,13 +21,13 @@ abstract public class Gun {
 
 
     //spawn a bullet 1 unit in front of use traveling in the direction specified by the click
-    public void click(Person holder, int xClick, int yClick) {
+    public void leftClick(Person holder, int xClick, int yClick) {
 
         if (lastFired + msBetweenShots < System.currentTimeMillis()) {
             float xDiff = (float) xClick - holder.xPos;
             float yDiff = (float) yClick - holder.yPos;
 
-            if (receiver.removeRound()) {
+            if (receiver.fireRound()) {
 
                 Bullet bullet = new Bullet(holder.xPos, holder.yPos, muzzleVelocity, xDiff, yDiff, maxRange);
                 LepEngine.bullets.add(bullet);
@@ -36,7 +38,19 @@ abstract public class Gun {
         //remove a bullet from the clip
     }
 
+    public void leftRelease() {
+        receiver.leftRelease();
+    }
 
+
+    public void rightClick(Person holder, int xClick, int yClick) {
+        if(receiver.getClass() == SemiAutomatic.class)
+            ((SemiAutomatic) receiver).changeMags(new Magazine(20, 20));
+        else if(receiver.getClass() == Automatic.class)
+            ((Automatic) receiver).changeMags(new Magazine(20,20));
+
+        receiver.cock();
+    }
 
 
 }

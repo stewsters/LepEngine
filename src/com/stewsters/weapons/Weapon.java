@@ -5,7 +5,10 @@ import com.stewsters.Person;
 
 public interface Weapon {
 
-	
-	public void click(Person holder, int xClick, int yClick);
-	
+
+    public void leftClick(Person holder, int xClick, int yClick);
+
+    public void rightClick(Person holder, int xClick, int yClick);
+
+    public void leftRelease();
 }

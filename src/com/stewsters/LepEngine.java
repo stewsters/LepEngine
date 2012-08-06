@@ -2,6 +2,7 @@ package com.stewsters;
 
 import com.stewsters.weapons.gun.AssaultRifle;
 import com.stewsters.weapons.gun.Pistol;
+import com.stewsters.weapons.gun.SMG;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -25,12 +26,17 @@ public class LepEngine extends PApplet {
 
         //Updates
         me.update();
-        if(mousePressed)
-            me.weapon.click(me,mouseX,mouseY);
-
+        if (mousePressed) {
+            if (mouseButton == LEFT)
+                me.weapon.leftClick(me, mouseX, mouseY);
+            else if (mouseButton == RIGHT)
+                me.weapon.rightClick(me, mouseX, mouseY);
+        } else {
+            me.weapon.leftRelease();
+        }
         Iterator<Bullet> iterator = bullets.iterator();
-        while (iterator.hasNext()){
-            if(iterator.next().update())
+        while (iterator.hasNext()) {
+            if (iterator.next().update())
                 iterator.remove();
         }
 
@@ -77,7 +83,7 @@ public class LepEngine extends PApplet {
 //    public void mousePressed() {
 //
 //        if (me.weapon != null) {
-//            me.weapon.click(me, mouseX, mouseY);
+//            me.weapon.leftClick(me, mouseX, mouseY);
 //        }
 //
 //    }
@@ -87,7 +93,6 @@ public class LepEngine extends PApplet {
 //            me.weapon.unclick(me, mouseX, mouseY);
 //        }
 //    }
-
 
 
 }

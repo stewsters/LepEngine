@@ -5,6 +5,10 @@ import com.stewsters.weapons.gun.attachment.Magazine;
 
 public interface Receiver {
 
-    public boolean removeRound();
+    public boolean fireRound();
+
+    public boolean cock();
+
+    public void leftRelease();
 
 }
