@@ -4,12 +4,13 @@ import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
 import com.stewsters.weapons.gun.attachment.Magazine;
+import com.stewsters.weapons.gun.receiver.Receiver;
 
 abstract public class Gun {
 
     public float deviance = 0.1f;
     public boolean triggerDown = false;
-    public Magazine magazine;
+    public Receiver receiver;
     public int msBetweenShots = 500; // 120 rpm
     public int msToReload = 2000; // 2 second reload time
     public long lastFired = 0;
@@ -24,7 +25,7 @@ abstract public class Gun {
             float xDiff = (float) xClick - holder.xPos;
             float yDiff = (float) yClick - holder.yPos;
 
-            if (magazine.removeRound()) {
+            if (receiver.removeRound()) {
 
                 Bullet bullet = new Bullet(holder.xPos, holder.yPos, muzzleVelocity, xDiff, yDiff, maxRange);
                 LepEngine.bullets.add(bullet);
@@ -36,15 +37,6 @@ abstract public class Gun {
     }
 
 
-    /**
-     * Replace the mag.  //TODO: we need to make this take time.
-     * @param freshMag
-     * @return
-     */
-    public Magazine changeMags(Magazine freshMag){
-        Magazine oldMag = magazine;
-        magazine = freshMag;
-        return oldMag;
-    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.stewsters;
 
-import com.stewsters.weapons.gun.receiver.Pistol;
+import com.stewsters.weapons.gun.AssaultRifle;
+import com.stewsters.weapons.gun.Pistol;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class LepEngine extends PApplet {
     public void setup() {
         size(200, 200);
         me = new Person();
-        me.weapon = new Pistol();
+        me.weapon = new AssaultRifle();
         bullets = new ArrayList<Bullet>();
 
     }
