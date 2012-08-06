@@ -4,10 +4,7 @@ import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
 import com.stewsters.weapons.gun.attachment.Magazine;
-import com.stewsters.weapons.gun.receiver.Automatic;
-import com.stewsters.weapons.gun.receiver.Receiver;
-import com.stewsters.weapons.gun.receiver.Revolver;
-import com.stewsters.weapons.gun.receiver.SemiAutomatic;
+import com.stewsters.weapons.gun.receiver.*;
 
 abstract public class Gun {
 
@@ -48,12 +45,13 @@ abstract public class Gun {
         if(receiver.getClass() == SemiAutomatic.class)
             ((SemiAutomatic) receiver).changeMags(new Magazine(20, 20));
         else if(receiver.getClass() == Automatic.class)
-            ((Automatic) receiver).changeMags(new Magazine(20,20));
+            ((Automatic) receiver).changeMags(new Magazine(30,30));
         else if(receiver.getClass() == Revolver.class){
             ((Revolver) receiver).reload();
         }
-
-        receiver.cock();
+        else if(receiver.getClass() == BoltAction.class){
+            ((BoltAction) receiver).cock();
+        }
     }
 
 
