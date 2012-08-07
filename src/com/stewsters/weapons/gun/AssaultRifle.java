@@ -1,7 +1,10 @@
 package com.stewsters.weapons.gun;
 
+import com.stewsters.Person;
 import com.stewsters.weapons.Weapon;
+import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.Automatic;
+import com.stewsters.weapons.gun.receiver.Revolver;
 import com.stewsters.weapons.gun.receiver.SemiAutomatic;
 
 public class AssaultRifle extends Gun implements Weapon {
@@ -14,6 +17,10 @@ public class AssaultRifle extends Gun implements Weapon {
         lastFired = 0;
         maxRange = 150.f;      //50m effective
         muzzleVelocity = 7.f;  //375m/s
+    }
+
+    public void rightClick(Person holder, int xClick, int yClick) {
+            ((SemiAutomatic) receiver).changeMags(new Magazine(20, 20));
     }
 
 

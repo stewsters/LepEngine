@@ -1,7 +1,11 @@
 package com.stewsters.weapons.gun;
 
+import com.stewsters.Person;
 import com.stewsters.weapons.Weapon;
+import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.Automatic;
+import com.stewsters.weapons.gun.receiver.Revolver;
+import com.stewsters.weapons.gun.receiver.SemiAutomatic;
 
 public class SMG extends Gun implements Weapon {
 
@@ -15,5 +19,8 @@ public class SMG extends Gun implements Weapon {
         muzzleVelocity = 5.f;  //375m/s
     }
 
+    public void rightClick(Person holder, int xClick, int yClick) {
+        ((Automatic) receiver).changeMags(new Magazine(30,30));
+    }
 
 }

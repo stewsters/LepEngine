@@ -44,17 +44,5 @@ abstract public class Gun {
     }
 
 
-    public void rightClick(Person holder, int xClick, int yClick) {
-        if(receiver.getClass() == SemiAutomatic.class)
-            ((SemiAutomatic) receiver).changeMags(new Magazine(20, 20));
-        else if(receiver.getClass() == Automatic.class)
-            ((Automatic) receiver).changeMags(new Magazine(20,20));
-        else if(receiver.getClass() == Revolver.class){
-            ((Revolver) receiver).reload();
-        }
-
-        receiver.cock();
-    }
-
 
 }
