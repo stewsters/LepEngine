@@ -14,7 +14,7 @@ public class Rifle extends Gun implements Weapon {
         receiver = new BoltAction();
         msBetweenShots = 500; // 600 rpm
         lastFired = 0;
-        maxRange = 300.f;      //50m effective
+        maxRange = 400.f;      //50m effective
         muzzleVelocity = 10.f;  //375m/s
     }
 

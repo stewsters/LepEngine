@@ -31,11 +31,11 @@ public class Bullet {
         rangeTraveled = 0;
         maxRange = maximumRange;
 	}
-	
-	//TODO: keep old position for bullet drag
+
 	public void render(PApplet context)
 	{
-		context.rect(xPos, yPos, 1, 1);
+        context.stroke(255,255,0);
+        context.line(xPos - xVel, yPos - yVel, xPos,yPos);
 	}
 	
 	//TODO: check for collision
