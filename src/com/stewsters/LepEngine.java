@@ -2,17 +2,29 @@ package com.stewsters;
 
 import com.stewsters.weapons.gun.*;
 import com.stewsters.weapons.gun.receiver.Revolver;
+import org.jbox2d.collision.AABB;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
 import processing.core.PApplet;
+import sun.font.PhysicalStrike;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class LepEngine extends PApplet {
 
+    public World world;
     public static Person me;
     public static ArrayList<Bullet> bullets;
 
     public void setup() {
+
+        AABB boundingBox = new AABB( new Vec2(-1000f,-1000f),new Vec2(1000f,1000f));
+        world = new World(boundingBox, new Vec2(0,0), true);
+        world.setContinuousPhysics(true);
+
+
+
         size(400, 400);
         me = new Person();
         me.weapon = new Magnum();
@@ -25,7 +37,9 @@ public class LepEngine extends PApplet {
         background(64);
 
         //Updates
-        me.update();
+//        me.update();
+
+
         if (mousePressed) {
             if (mouseButton == LEFT)
                 me.weapon.leftClick(me, mouseX, mouseY);
@@ -34,6 +48,10 @@ public class LepEngine extends PApplet {
         } else {
             me.weapon.leftRelease();
         }
+
+        //30 physics frames per second
+        world.step(1.0f/30, 10);
+
         Iterator<Bullet> iterator = bullets.iterator();
         while (iterator.hasNext()) {
             if (iterator.next().update())
