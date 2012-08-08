@@ -19,7 +19,7 @@ public class BoltAction implements Receiver {
     Magazine magazine = new Magazine(5, 5);
 
 
-    public boolean openBolt(){
+    public boolean openBolt() {
         long currentTime = System.currentTimeMillis();
         if (lastReloaded + timeToReload < currentTime) {
             boltOpen = true;
@@ -33,29 +33,34 @@ public class BoltAction implements Receiver {
 
     /**
      * Can either insert by hand or with a stripper clip
+     *
      * @return
      */
-//    public boolean insertRounds(int numberOfRoundsInserted){
-//        if(boltOpen){
-//
-//        }
-//    }
+    public boolean insertRound() {
+        if (boltOpen) {
+            if (roundChambered) {
+                return magazine.addRound();
+            } else {
+                roundChambered = true;
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public boolean closeBold(){
+    public boolean closeBolt() {
         boltOpen = false;
         cocked = true;
         return true;
     }
 
 
-
     @Override
     public boolean cock() {
         long currentTime = System.currentTimeMillis();
         if (lastReloaded + timeToReload < currentTime) {
-            cocked = true;
-            roundChambered = magazine.removeRound();
-            lastReloaded = currentTime;
+            openBolt();
+            closeBolt();
             return true;
         } else return false;
     }
