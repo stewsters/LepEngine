@@ -25,7 +25,7 @@ public class Wall {
         // Create Body in World.
         body = Game.world.createBody(bodyDef);
         wallBox = new PolygonShape();
-        wallBox.setAsBox(dimensions.x, dimensions.y, new Vec2(0,0),0);
+        wallBox.setAsBox(dimensions.x/2f, dimensions.y/2f);
         body.createFixture(wallBox, 1.0f);
     }
 

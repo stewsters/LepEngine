@@ -30,7 +30,7 @@ abstract public class Gun {
 
             if (receiver.fireRound()) {
 
-                Bullet bullet = new Bullet(holderPosition.x, holderPosition.y, muzzleVelocity, xDiff, yDiff, maxRange);
+                Bullet bullet = new Bullet(holderPosition.add(new Vec2(2,2)), muzzleVelocity, xDiff, yDiff, maxRange);
                 LepEngine.bullets.add(bullet);
                 lastFired = System.currentTimeMillis();
 

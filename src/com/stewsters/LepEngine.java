@@ -15,7 +15,6 @@ public class LepEngine extends PApplet {
 
     public static Person me;
     public static ArrayList<Bullet> bullets;
-
     public static ArrayList<Wall> walls;
 
     public void setup() {
@@ -25,7 +24,7 @@ public class LepEngine extends PApplet {
 
         size(Camera.windowSizeX, Camera.windowSizeY);
         me = new Person();
-        me.weapon = new Magnum();
+        me.weapon = new SMG();
 
         bullets = new ArrayList<Bullet>();
         walls = new ArrayList<Wall>();
@@ -50,8 +49,12 @@ public class LepEngine extends PApplet {
         Camera.target = me.body.getPosition();
         Camera.focusOnGame(this);
 
+
+        Vec2 gameCoord = Camera.cameraToGame(new Vec2(mouseX, mouseY));
+        line(me.body.getPosition().x,me.body.getPosition().y, gameCoord.x,gameCoord.y);
+
         if (mousePressed) {
-            Vec2 gameCoord = Camera.cameraToGame(new Vec2(mouseX, mouseY));
+
             if (mouseButton == LEFT)
                 me.weapon.leftClick(me, gameCoord.x, gameCoord.y);
             else if (mouseButton == RIGHT)
@@ -61,11 +64,11 @@ public class LepEngine extends PApplet {
         }
 
 
-        Iterator<Bullet> iterator = bullets.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().update())
-                iterator.remove();
-        }
+//        Iterator<Bullet> iterator = bullets.iterator();
+//        while (iterator.hasNext()) {
+//            if (iterator.next().update())
+//                iterator.remove();
+//        }
 
 
         //Renders

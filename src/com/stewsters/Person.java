@@ -18,6 +18,7 @@ public class Person {
     PolygonShape shape;
     FixtureDef dynamicFixDef;
 
+
     //char
     float maxSpeed = 80f;
     Vec2 acceleration;
@@ -35,12 +36,12 @@ public class Person {
         body.setLinearDamping(4f);
 
         shape = new PolygonShape();
-        shape.setAsBox(personWidth, personWidth, new Vec2(0f, 0f), 0);
+        shape.setAsBox(personWidth/2f, personWidth/2f);
         dynamicFixDef = new FixtureDef();
         dynamicFixDef.shape = shape;
         dynamicFixDef.density = 1.0f;
         dynamicFixDef.friction = 1f;
-        //dynamicBodyDef.linearDamping = 200f;
+
         body.createFixture(dynamicFixDef);
 
 
