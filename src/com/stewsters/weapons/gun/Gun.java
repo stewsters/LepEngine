@@ -3,8 +3,10 @@ package com.stewsters.weapons.gun;
 import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
+import com.stewsters.physics.Game;
 import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.*;
+import org.jbox2d.common.Vec2;
 
 abstract public class Gun {
 
@@ -20,19 +22,20 @@ abstract public class Gun {
 
     //spawn a bullet 1 unit in front of use traveling in the direction specified by the click
     public void leftClick(Person holder, int xClick, int yClick) {
-
-        if (lastFired + msBetweenShots < System.currentTimeMillis()) {
-            float xDiff = (float) xClick - holder.xPos;
-            float yDiff = (float) yClick - holder.yPos;
-
-            if (receiver.fireRound()) {
-
-                Bullet bullet = new Bullet(holder.xPos, holder.yPos, muzzleVelocity, xDiff, yDiff, maxRange);
-                LepEngine.bullets.add(bullet);
-                lastFired = System.currentTimeMillis();
-
-            }
-        }
+//        Vec2 holderPosition = Game.gameCoordsToDisplay(holder.body.getPosition());
+//
+//        if (lastFired + msBetweenShots < System.currentTimeMillis()) {
+//            float xDiff = (float) xClick - holderPosition.;
+//            float yDiff = (float) yClick - holder.yPos;
+//
+//            if (receiver.fireRound()) {
+//
+//                Bullet bullet = new Bullet(holder.xPos, holder.yPos, muzzleVelocity, xDiff, yDiff, maxRange);
+//                LepEngine.bullets.add(bullet);
+//                lastFired = System.currentTimeMillis();
+//
+//            }
+//        }
         //remove a bullet from the clip
     }
 

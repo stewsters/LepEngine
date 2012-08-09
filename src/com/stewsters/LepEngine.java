@@ -1,5 +1,6 @@
 package com.stewsters;
 
+import com.stewsters.physics.Game;
 import com.stewsters.weapons.gun.*;
 import com.stewsters.weapons.gun.receiver.Revolver;
 import org.jbox2d.collision.AABB;
@@ -13,16 +14,17 @@ import java.util.Iterator;
 
 public class LepEngine extends PApplet {
 
-    public World world;
+
     public static Person me;
     public static ArrayList<Bullet> bullets;
 
+
+
     public void setup() {
 
-        AABB boundingBox = new AABB( new Vec2(-1000f,-1000f),new Vec2(1000f,1000f));
-        world = new World(boundingBox, new Vec2(0,0), true);
-        world.setContinuousPhysics(true);
+//        AABB boundingBox = new AABB( new Vec2(-1000f,-1000f),new Vec2(1000f,1000f));
 
+        Game.initialize();
 
 
         size(400, 400);
@@ -37,7 +39,9 @@ public class LepEngine extends PApplet {
         background(64);
 
         //Updates
-//        me.update();
+        me.update();
+
+        Game.step();
 
 
         if (mousePressed) {
@@ -49,8 +53,7 @@ public class LepEngine extends PApplet {
             me.weapon.leftRelease();
         }
 
-        //30 physics frames per second
-        world.step(1.0f/30, 10);
+
 
         Iterator<Bullet> iterator = bullets.iterator();
         while (iterator.hasNext()) {
@@ -72,27 +75,28 @@ public class LepEngine extends PApplet {
      * Controls
      */
     public void keyPressed() {
+
         if (key == 'w') {
-            me.yVel = -1;
+            me.velocity.y = -me.maxSpeed;
         } else if (key == 's') {
-            me.yVel = 1;
+            me.velocity.y = me.maxSpeed;
         } else if (key == 'a') {
-            me.xVel = -1;
+            me.velocity.x = -me.maxSpeed;
         } else if (key == 'd') {
-            me.xVel = 1;
+            me.velocity.x = me.maxSpeed;
         }
     }
 
     public void keyReleased() {
 
         if (key == 'w') {
-            me.yVel = max(0, me.yVel);
+            me.velocity.y = max(0, me.velocity.y);
         } else if (key == 's') {
-            me.yVel = min(0, me.yVel);
+            me.velocity.y = min(0, me.velocity.y);
         } else if (key == 'a') {
-            me.xVel = max(0, me.xVel);
+            me.velocity.x = max(0, me.velocity.x);
         } else if (key == 'd') {
-            me.xVel = min(0, me.xVel);
+            me.velocity.x  = min(0, me.velocity.x);
         }
     }
 
