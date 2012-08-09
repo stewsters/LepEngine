@@ -1,13 +1,11 @@
 package com.stewsters;
 
+import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
+import com.stewsters.physics.Wall;
 import com.stewsters.weapons.gun.*;
-import com.stewsters.weapons.gun.receiver.Revolver;
-import org.jbox2d.collision.AABB;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.World;
 import processing.core.PApplet;
-import sun.font.PhysicalStrike;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,19 +16,24 @@ public class LepEngine extends PApplet {
     public static Person me;
     public static ArrayList<Bullet> bullets;
 
-
+    public static ArrayList<Wall> walls;
 
     public void setup() {
 
-//        AABB boundingBox = new AABB( new Vec2(-1000f,-1000f),new Vec2(1000f,1000f));
-
         Game.initialize();
+        rectMode(CENTER);
 
-
-        size(400, 400);
+        size(Camera.windowSizeX, Camera.windowSizeY);
         me = new Person();
         me.weapon = new Magnum();
+
         bullets = new ArrayList<Bullet>();
+        walls = new ArrayList<Wall>();
+
+        walls.add( new Wall(new Vec2(60, 60), new Vec2(40, 20)));
+        walls.add( new Wall(new Vec2(-50, 50), new Vec2(20, 40)));
+        walls.add( new Wall(new Vec2(-50, -50), new Vec2(20, 40)));
+        walls.add( new Wall(new Vec2(50, -50), new Vec2(20, 40)));
 
         frameRate(30);
     }
@@ -39,10 +42,12 @@ public class LepEngine extends PApplet {
         background(64);
 
         //Updates
-        me.update();
 
+        me.update();
         Game.step();
 
+        pushMatrix();
+        Camera.focusOnGame(this,me.body.getPosition());
 
         if (mousePressed) {
             if (mouseButton == LEFT)
@@ -54,7 +59,6 @@ public class LepEngine extends PApplet {
         }
 
 
-
         Iterator<Bullet> iterator = bullets.iterator();
         while (iterator.hasNext()) {
             if (iterator.next().update())
@@ -63,10 +67,15 @@ public class LepEngine extends PApplet {
 
 
         //Renders
+        for(Wall wall : walls){
+            wall.render(this);
+        }
+
         me.render(this);
         for (Bullet bullet : bullets) {
             bullet.render(this);
         }
+        popMatrix();
 
     }
 
@@ -77,26 +86,26 @@ public class LepEngine extends PApplet {
     public void keyPressed() {
 
         if (key == 'w') {
-            me.velocity.y = -me.maxSpeed;
+            me.acceleration.y = me.maxSpeed;
         } else if (key == 's') {
-            me.velocity.y = me.maxSpeed;
+            me.acceleration.y = -me.maxSpeed;
         } else if (key == 'a') {
-            me.velocity.x = -me.maxSpeed;
+            me.acceleration.x = -me.maxSpeed;
         } else if (key == 'd') {
-            me.velocity.x = me.maxSpeed;
+            me.acceleration.x = me.maxSpeed;
         }
     }
 
     public void keyReleased() {
 
         if (key == 'w') {
-            me.velocity.y = max(0, me.velocity.y);
+            me.acceleration.y = min(0, me.acceleration.y);
         } else if (key == 's') {
-            me.velocity.y = min(0, me.velocity.y);
+            me.acceleration.y = max(0, me.acceleration.y);
         } else if (key == 'a') {
-            me.velocity.x = max(0, me.velocity.x);
+            me.acceleration.x = max(0, me.acceleration.x);
         } else if (key == 'd') {
-            me.velocity.x  = min(0, me.velocity.x);
+            me.acceleration.x = min(0, me.acceleration.x);
         }
     }
 

@@ -19,43 +19,46 @@ public class Person {
     FixtureDef dynamicFixDef;
 
     //char
-    float maxSpeed = 50f;
-    Vec2 velocity;
+    float maxSpeed = 80f;
+    Vec2 acceleration;
     public Weapon weapon;
 
-    public Person(){
-        velocity = new Vec2(0,0);
+    float personWidth = 1.f;
+
+    public Person() {
+        acceleration = new Vec2(0, 0);
 
         dynamicBodyDef = new BodyDef();
         dynamicBodyDef.type = BodyType.DYNAMIC;
-        dynamicBodyDef.position = new Vec2( 0f, 0f );
-        body = Game.world.createBody( dynamicBodyDef );
+        dynamicBodyDef.position = new Vec2(0f, 0f);
+        body = Game.world.createBody(dynamicBodyDef);
+        body.setLinearDamping(4f);
 
         shape = new PolygonShape();
-        shape.setAsBox( 1, 1 );
+        shape.setAsBox(personWidth, personWidth, new Vec2(0f, 0f), 0);
         dynamicFixDef = new FixtureDef();
         dynamicFixDef.shape = shape;
         dynamicFixDef.density = 1.0f;
-        dynamicFixDef.friction = 0.3f;
-        body.createFixture( dynamicFixDef );
+        dynamicFixDef.friction = 1f;
+        //dynamicBodyDef.linearDamping = 200f;
+        body.createFixture(dynamicFixDef);
+
+
     }
 
-    public final int pixelWidth = 16;
+    public void destroy() {
+        Game.world.destroyBody(body);
+    }
 
 
 
-	
-	public void render(PApplet context)
-	{
-        Vec2 graphicPos = Game.gameCoordsToDisplay(body.getPosition());
-		context.rect(graphicPos.x -(pixelWidth/2), graphicPos.y -(pixelWidth/2), pixelWidth, pixelWidth);
-	}
+    public void render(PApplet context) {
+        context.rect(body.getPosition().x, body.getPosition().y, personWidth, personWidth);
+    }
 
 
-	
-	public void update()
-	{
-        body.setLinearVelocity(velocity);
+    public void update() {
+        body.applyLinearImpulse(acceleration, dynamicBodyDef.position);
 
-	}
+    }
 }
