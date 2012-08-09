@@ -22,7 +22,8 @@ public class Pistol extends Gun implements Weapon {
         muzzleVelocity = 5.f;  //375m/s
     }
 
-    public void rightClick(Person holder, int xClick, int yClick) {
+    @Override
+    public void rightClick(Person holder, float xClick, float yClick) {
         ((SemiAutomatic) receiver).changeMags(new Magazine(8, 8));
         receiver.cock();
     }

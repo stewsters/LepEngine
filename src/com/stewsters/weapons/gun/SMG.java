@@ -17,7 +17,8 @@ public class SMG extends Gun implements Weapon {
         muzzleVelocity = 5.f;  //375m/s
     }
 
-    public void rightClick(Person holder, int xClick, int yClick) {
+    @Override
+    public void rightClick(Person holder, float xClick, float yClick) {
         ((Automatic) receiver).changeMags(new Magazine(30, 30));
         receiver.cock();
     }

@@ -13,7 +13,7 @@ import processing.core.PApplet;
 public class Person {
 
     /*physics*/
-    Body body;
+    public Body body;
     BodyDef dynamicBodyDef;
     PolygonShape shape;
     FixtureDef dynamicFixDef;

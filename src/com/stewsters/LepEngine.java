@@ -33,7 +33,7 @@ public class LepEngine extends PApplet {
         walls.add( new Wall(new Vec2(60, 60), new Vec2(40, 20)));
         walls.add( new Wall(new Vec2(-50, 50), new Vec2(20, 40)));
         walls.add( new Wall(new Vec2(-50, -50), new Vec2(20, 40)));
-        walls.add( new Wall(new Vec2(50, -50), new Vec2(20, 40)));
+        walls.add(new Wall(new Vec2(50, -50), new Vec2(20, 40)));
 
         frameRate(30);
     }
@@ -47,13 +47,15 @@ public class LepEngine extends PApplet {
         Game.step();
 
         pushMatrix();
-        Camera.focusOnGame(this,me.body.getPosition());
+        Camera.target = me.body.getPosition();
+        Camera.focusOnGame(this);
 
         if (mousePressed) {
+            Vec2 gameCoord = Camera.cameraToGame(new Vec2(mouseX, mouseY));
             if (mouseButton == LEFT)
-                me.weapon.leftClick(me, mouseX, mouseY);
+                me.weapon.leftClick(me, gameCoord.x, gameCoord.y);
             else if (mouseButton == RIGHT)
-                me.weapon.rightClick(me, mouseX, mouseY);
+                me.weapon.rightClick(me, gameCoord.x, gameCoord.y);
         } else {
             me.weapon.leftRelease();
         }

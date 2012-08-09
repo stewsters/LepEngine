@@ -18,10 +18,10 @@ public class Rifle extends Gun implements Weapon {
         muzzleVelocity = 10.f;  //375m/s
     }
 
-    public void rightClick(Person holder, int xClick, int yClick)
+    @Override
+    public void rightClick(Person holder, float xClick, float yClick)
     {
         ((BoltAction) receiver).cock();
-
 
     }
 

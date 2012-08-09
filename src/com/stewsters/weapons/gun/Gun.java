@@ -21,21 +21,21 @@ abstract public class Gun {
 
 
     //spawn a bullet 1 unit in front of use traveling in the direction specified by the click
-    public void leftClick(Person holder, int xClick, int yClick) {
-//        Vec2 holderPosition = Game.gameCoordsToDisplay(holder.body.getPosition());
-//
-//        if (lastFired + msBetweenShots < System.currentTimeMillis()) {
-//            float xDiff = (float) xClick - holderPosition.;
-//            float yDiff = (float) yClick - holder.yPos;
-//
-//            if (receiver.fireRound()) {
-//
-//                Bullet bullet = new Bullet(holder.xPos, holder.yPos, muzzleVelocity, xDiff, yDiff, maxRange);
-//                LepEngine.bullets.add(bullet);
-//                lastFired = System.currentTimeMillis();
-//
-//            }
-//        }
+    public void leftClick(Person holder, float xClick, float yClick) {
+        Vec2 holderPosition = holder.body.getPosition();
+
+        if (lastFired + msBetweenShots < System.currentTimeMillis()) {
+            float xDiff = (float) xClick - holderPosition.x;
+            float yDiff = (float) yClick - holderPosition.y;
+
+            if (receiver.fireRound()) {
+
+                Bullet bullet = new Bullet(holderPosition.x, holderPosition.y, muzzleVelocity, xDiff, yDiff, maxRange);
+                LepEngine.bullets.add(bullet);
+                lastFired = System.currentTimeMillis();
+
+            }
+        }
         //remove a bullet from the clip
     }
 
@@ -44,7 +44,7 @@ abstract public class Gun {
     }
 
 
-    public void rightClick(Person holder, int xClick, int yClick) {
+    public void rightClick(Person holder, float xClick, float yClick) {
         if(receiver.getClass() == SemiAutomatic.class)
             ((SemiAutomatic) receiver).changeMags(new Magazine(20, 20));
         else if(receiver.getClass() == Automatic.class)

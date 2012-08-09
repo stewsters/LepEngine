@@ -22,7 +22,8 @@ public class Magnum extends Gun implements Weapon {
     }
 
 
-    public void rightClick(Person holder, int xClick, int yClick) {
+    @Override
+    public void rightClick(Person holder, float xClick, float yClick) {
         ((Revolver) receiver).reload();
         receiver.cock();
     }
