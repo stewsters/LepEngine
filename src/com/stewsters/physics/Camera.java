@@ -8,7 +8,7 @@ public class Camera {
     public static final int windowSizeX = 400;
     public static final int windowSizeY = 400;
 
-    public static float zoom = 1;
+    public static float zoom = 3;
 
     public static Vec2 target;
 

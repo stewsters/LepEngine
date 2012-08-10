@@ -20,7 +20,7 @@ public class Person {
 
 
     //char
-    float maxSpeed = 80f;
+    float maxSpeed = 50f;
     Vec2 acceleration;
     public Weapon weapon;
 
@@ -54,6 +54,7 @@ public class Person {
 
 
     public void render(PApplet context) {
+        context.stroke(255,0,0);
         context.rect(body.getPosition().x, body.getPosition().y, personWidth, personWidth);
     }
 

@@ -18,7 +18,7 @@ public class Pistol extends Gun implements Weapon {
         receiver = new Automatic();
         msBetweenShots = 500; // 600 rpm
         lastFired = 0;
-        maxRange = 200.f;      //50m effective
+        bulletRemovalSpeed = 0.2f;    //50m effective
         muzzleVelocity = 5.f;  //375m/s
     }
 

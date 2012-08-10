@@ -3,7 +3,6 @@ package com.stewsters.weapons.gun;
 
 import com.stewsters.Person;
 import com.stewsters.weapons.Weapon;
-import com.stewsters.weapons.gun.receiver.Automatic;
 import com.stewsters.weapons.gun.receiver.BoltAction;
 
 public class Rifle extends Gun implements Weapon {
@@ -14,7 +13,7 @@ public class Rifle extends Gun implements Weapon {
         receiver = new BoltAction();
         msBetweenShots = 500; // 600 rpm
         lastFired = 0;
-        maxRange = 400.f;      //50m effective
+        bulletRemovalSpeed = 0.2f;      //50m effective
         muzzleVelocity = 10.f;  //375m/s
     }
 

@@ -51,10 +51,9 @@ public class LepEngine extends PApplet {
 
 
         Vec2 gameCoord = Camera.cameraToGame(new Vec2(mouseX, mouseY));
-        line(me.body.getPosition().x,me.body.getPosition().y, gameCoord.x,gameCoord.y);
+//        line(me.body.getPosition().x,me.body.getPosition().y, gameCoord.x,gameCoord.y);
 
         if (mousePressed) {
-
             if (mouseButton == LEFT)
                 me.weapon.leftClick(me, gameCoord.x, gameCoord.y);
             else if (mouseButton == RIGHT)
@@ -64,11 +63,12 @@ public class LepEngine extends PApplet {
         }
 
 
-//        Iterator<Bullet> iterator = bullets.iterator();
-//        while (iterator.hasNext()) {
-//            if (iterator.next().update())
-//                iterator.remove();
-//        }
+
+        Iterator<Bullet> iterator = bullets.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().update())
+                iterator.remove();
+        }
 
 
         //Renders
@@ -80,6 +80,9 @@ public class LepEngine extends PApplet {
         for (Bullet bullet : bullets) {
             bullet.render(this);
         }
+
+        if(p != null)
+            p.render(this);
         popMatrix();
 
     }
@@ -88,6 +91,8 @@ public class LepEngine extends PApplet {
     /**
      * Controls
      */
+    Person p;
+
     public void keyPressed() {
 
         if (key == 'w') {
@@ -98,6 +103,11 @@ public class LepEngine extends PApplet {
             me.acceleration.x = -me.maxSpeed;
         } else if (key == 'd') {
             me.acceleration.x = me.maxSpeed;
+        }
+
+        if(key == 'x'){
+            println("x pushed");
+            p = new Person();
         }
     }
 

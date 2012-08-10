@@ -3,7 +3,6 @@ package com.stewsters.weapons.gun;
 import com.stewsters.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
-import com.stewsters.physics.Game;
 import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.*;
 import org.jbox2d.common.Vec2;
@@ -16,7 +15,7 @@ abstract public class Gun {
     public int msBetweenShots = 500; // 120 rpm
     public int msToReload = 2000; // 2 second reload time
     public long lastFired = 0;
-    public float maxRange = 100.f;      //50m effective
+    public float bulletRemovalSpeed = 0.2f;      //50m effective
     public float muzzleVelocity = 5.f;  //375m/s
 
 
@@ -28,9 +27,11 @@ abstract public class Gun {
             float xDiff = (float) xClick - holderPosition.x;
             float yDiff = (float) yClick - holderPosition.y;
 
+            Vec2 diff = new Vec2(xDiff, yDiff);
+
             if (receiver.fireRound()) {
 
-                Bullet bullet = new Bullet(holderPosition.add(new Vec2(2,2)), muzzleVelocity, xDiff, yDiff, maxRange);
+                Bullet bullet = new Bullet(holderPosition.add(new Vec2(2,2)), diff,muzzleVelocity, bulletRemovalSpeed);
                 LepEngine.bullets.add(bullet);
                 lastFired = System.currentTimeMillis();
 

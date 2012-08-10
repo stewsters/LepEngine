@@ -1,7 +1,6 @@
 package com.stewsters;
 
 import com.stewsters.physics.Game;
-import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -19,35 +18,26 @@ public class Bullet {
     PolygonShape shape;
     FixtureDef dynamicFixDef;
 
-	public Vec2 bulletVelocity;
-	
-	public float xPos;
-	public float yPos;
-	public float xVel;
-	public float yVel;
-	
-	public float xDrag;
-	public float yDrag;
-    public float bulletWidth;
+    public Vec2 bulletVelocity;
 
-    public float rangeTraveled;
-	public float maxRange;
+    public float bulletWidth = 0.1f;
+    public float minFlightSpeedSquared;
 
-	public Bullet(Vec2 startingPos, float velocity, float xVelUnscaled, float yVelUnscaled,float maximumRange){
+    public Bullet(Vec2 startingPos,  Vec2 bulletVelocity,float velocity, float velocityPercentage) {
 
-		bulletVelocity  = new Vec2(xVelUnscaled,yVelUnscaled);
         bulletVelocity.normalize();
-        bulletVelocity.mul(velocity);
+        bulletVelocity.mulLocal(velocity);
+
 
         dynamicBodyDef = new BodyDef();
         dynamicBodyDef.type = BodyType.DYNAMIC;
         dynamicBodyDef.position = startingPos;
 
         body = Game.world.createBody(dynamicBodyDef);
-        body.setLinearDamping(.01f);
+        body.setLinearDamping(.1f);
 
         shape = new PolygonShape();
-        shape.setAsBox(bulletWidth/2f, bulletWidth/2f);
+        shape.setAsBox(bulletWidth / 2f, bulletWidth / 2f);
         dynamicFixDef = new FixtureDef();
         dynamicFixDef.shape = shape;
         dynamicFixDef.density = 1.0f;
@@ -56,25 +46,30 @@ public class Bullet {
         body.createFixture(dynamicFixDef);
         body.setLinearVelocity(bulletVelocity);
 
-        rangeTraveled = 0;
-        maxRange = maximumRange;
-	}
+        minFlightSpeedSquared = (float)Math.pow((double)(velocity * velocityPercentage), 2.0);
+    }
 
-	public void render(PApplet context)
-	{
-        context.stroke(255,255,0);
+    public void render(PApplet context) {
+         context.stroke(255,255,0);
 //        Vec2 pos = body.getPosition();
 //        Vec2 vel = body.getLinearVelocity();
 //        context.line(pos.x - vel.x, pos.y - vel.y, pos.x,pos.y);
         context.rect(body.getPosition().x, body.getPosition().y, bulletWidth, bulletWidth);
-	}
-	
-	//TODO: check for collision
-	public boolean update()
-	{
-//        rangeTraveled += bulletVelocity.length();
-//        return (rangeTraveled > maxRange );
-        return false;
-	}
+    }
+
+    //TODO: check for collision
+    public boolean update() {
+
+        if (body.getLinearVelocity().lengthSquared() < minFlightSpeedSquared) {
+            System.out.println("boom");
+            destroy();
+            return true;
+        } else
+            return false;
+    }
+
+    public void destroy() {
+        Game.world.destroyBody(body);
+    }
 
 }

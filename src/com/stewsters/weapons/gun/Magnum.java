@@ -17,7 +17,7 @@ public class Magnum extends Gun implements Weapon {
         receiver = new Revolver();
         msBetweenShots = 500; // 600 rpm
         lastFired = 0;
-        maxRange = 200.f;      //50m effective
+        bulletRemovalSpeed = 0.2f;      //50m effective
         muzzleVelocity = 8.f;  //375m/s
     }
 

@@ -13,8 +13,8 @@ public class SMG extends Gun implements Weapon {
         receiver = new Automatic();
         msBetweenShots = 100; // 300 rpm
         lastFired = 0;
-        maxRange = 200.f;      //50m effective
-        muzzleVelocity = 5.f;  //375m/s
+        bulletRemovalSpeed = 0.2f;      //50m effective
+        muzzleVelocity = 200.f;  //375m/s
     }
 
     @Override
