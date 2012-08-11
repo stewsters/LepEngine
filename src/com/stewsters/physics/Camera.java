@@ -5,10 +5,10 @@ import processing.core.PApplet;
 
 public class Camera {
 
-    public static final int windowSizeX = 400;
-    public static final int windowSizeY = 400;
+    public static final int windowSizeX = 800;
+    public static final int windowSizeY = 800;
 
-    public static float zoom = 3;
+    public static float zoom = 6;
 
     public static Vec2 target;
 

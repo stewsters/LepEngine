@@ -20,7 +20,7 @@ public class Bullet {
 
     public Vec2 bulletVelocity;
 
-    public float bulletWidth = 0.1f;
+    public float bulletWidth = 0.5f;
     public float minFlightSpeedSquared;
 
     public Bullet(Vec2 startingPos,  Vec2 bulletVelocity,float velocity, float velocityPercentage) {
@@ -50,7 +50,8 @@ public class Bullet {
     }
 
     public void render(PApplet context) {
-         context.stroke(255,255,0);
+        context.noStroke();
+
 //        Vec2 pos = body.getPosition();
 //        Vec2 vel = body.getLinearVelocity();
 //        context.line(pos.x - vel.x, pos.y - vel.y, pos.x,pos.y);

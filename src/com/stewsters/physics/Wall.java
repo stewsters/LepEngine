@@ -35,7 +35,7 @@ public class Wall {
 
     public void render(PApplet context) {
 
-        context.stroke(0,0,255);
+        context.noStroke();
         context.rect(physicsCenter.x, physicsCenter.y, physicsDimensions.x, physicsDimensions.y);
     }
 

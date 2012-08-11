@@ -1,0 +1,11 @@
+This directory will hold animations for the character. To create a new animation.
+
+
+label Files in these animation folders as 
+
+00-walk.png
+01-walk.png
+02-walk.png
+03-walk.png
+
+They will be loaded in in alphabetical order

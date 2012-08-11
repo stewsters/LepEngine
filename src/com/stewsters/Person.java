@@ -54,7 +54,7 @@ public class Person {
 
 
     public void render(PApplet context) {
-        context.stroke(255,0,0);
+        context.noStroke();
         context.rect(body.getPosition().x, body.getPosition().y, personWidth, personWidth);
     }
 
