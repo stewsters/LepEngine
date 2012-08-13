@@ -5,16 +5,17 @@ import processing.core.PImage;
 
 import java.io.File;
 
-class Animation {
-    public static final String baseAnimationDir = "asset/image/animation";
+public class Animation {
+    public static final String baseAnimationDir = "/home/bloodred/code/LepEngine/asset/image/animation";
 
     PImage[] images;
     int imageCount;
     int frame;
 
-    Animation(PApplet context, String imagePrefix) {
+    public Animation(PApplet context, String imagePrefix) {
 
         File animationFolder = new File(baseAnimationDir + File.pathSeparator + imagePrefix);
+        System.out.println(animationFolder.getAbsolutePath());
         File[] files = animationFolder.listFiles();
 
         imageCount = files.length;
@@ -27,12 +28,12 @@ class Animation {
         }
     }
 
-    void display(PApplet context, float xpos, float ypos) {
+    public void display(PApplet context, float xpos, float ypos) {
         frame = (frame + 1) % imageCount;
         context.image(images[frame], xpos, ypos);
     }
 
-    int getWidth() {
+    public int getWidth() {
         return images[0].width;
     }
 }
