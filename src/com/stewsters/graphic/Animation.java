@@ -14,7 +14,7 @@ public class Animation {
 
     public Animation(PApplet context, String imagePrefix) {
 
-        File animationFolder = new File(baseAnimationDir + File.pathSeparator + imagePrefix);
+        File animationFolder = new File(baseAnimationDir + File.separator + imagePrefix);
         System.out.println(animationFolder.getAbsolutePath());
         File[] files = animationFolder.listFiles();
 
