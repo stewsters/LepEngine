@@ -10,7 +10,7 @@ public class AnimationTest extends PApplet {
     public void setup() {
         size(200,200);
         frameRate(5);
-        animation = new Animation(this,"character/walk");
+        animation = new Animation(this,"zombie/walk");
     }
 
     @Override
