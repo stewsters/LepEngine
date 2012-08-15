@@ -10,10 +10,10 @@ public class Animation {
 
     PImage[] images;
     int imageCount;
-    int frame;
+
+    Long msRunTime = 1000l; //default is a ms
 
     public Animation(PApplet context, String imagePrefix) {
-
         File animationFolder = new File(baseAnimationDir + File.separator + imagePrefix);
         System.out.println(animationFolder.getAbsolutePath());
         File[] files = animationFolder.listFiles();
@@ -22,14 +22,14 @@ public class Animation {
         images = new PImage[imageCount];
 
         for (int i = 0; i < imageCount; i++) {
-            // Use nf() to number format 'i' into four digits
             String filename = files[i].getAbsolutePath();
             images[i] = context.loadImage(filename);
         }
     }
 
-    public void display(PApplet context, float xpos, float ypos) {
-        frame = (frame + 1) % imageCount;
+    public void display(PApplet context, Long frameTime, float xpos, float ypos) {
+
+        int frame = (int)Math.floor(( (float)(frameTime % msRunTime)  / (float) msRunTime) * imageCount);
         context.image(images[frame], xpos, ypos);
     }
 
