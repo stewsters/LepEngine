@@ -11,7 +11,7 @@ public class Animation {
     PImage[] images;
     int imageCount;
 
-    Long msRunTime = 1000l; //default is a ms
+    public long msRunTime = 1000l; //default is a ms
 
     public Animation(PApplet context, String imagePrefix) {
         File animationFolder = new File(baseAnimationDir + File.separator + imagePrefix);
