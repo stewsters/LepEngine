@@ -6,7 +6,7 @@ import processing.core.PImage;
 import java.io.File;
 
 public class Animation {
-    public static final String baseAnimationDir = "/home/bloodred/code/LepEngine/asset/image/animation";
+    public static final String baseAnimationDir = "/home/bloodred/privatecode/LepEngine/asset/image/animation";
 
     PImage[] images;
     int imageCount;
