@@ -18,8 +18,6 @@ public class Bullet {
     PolygonShape shape;
     FixtureDef dynamicFixDef;
 
-    public Vec2 bulletVelocity;
-
     public float bulletWidth = 0.5f;
     public float minFlightSpeedSquared;
 

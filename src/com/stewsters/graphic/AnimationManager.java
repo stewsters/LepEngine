@@ -12,7 +12,7 @@ public class AnimationManager {
     Animation currentAnimation;
     long animationStartTime = 0l;
     boolean keepLooping = false;
-
+    float angle = 0;
 
     public AnimationManager(PApplet context, String defaultAnimationName){
         defaultAnimation = AnimationStore.getAnimation(context, defaultAnimationName);
@@ -43,8 +43,13 @@ public class AnimationManager {
         {
             stopAnimation();
         }
-        currentAnimation.display(context,animationTime,xPos,yPos);
+
+        currentAnimation.display(context,animationTime,xPos,yPos,angle);
     }
 
+
+    public void face(float angle){
+        this.angle = angle;
+    }
 
 }

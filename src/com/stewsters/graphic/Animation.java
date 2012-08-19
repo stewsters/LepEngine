@@ -6,7 +6,7 @@ import processing.core.PImage;
 import java.io.File;
 
 public class Animation {
-    public static final String baseAnimationDir = "/home/bloodred/privatecode/LepEngine/asset/image/animation";
+    public static final String baseAnimationDir = "/home/bloodred/code/LepEngine/asset/image/animation";
 
     PImage[] images;
     int imageCount;
@@ -25,12 +25,19 @@ public class Animation {
             String filename = files[i].getAbsolutePath();
             images[i] = context.loadImage(filename);
         }
+
     }
 
-    public void display(PApplet context, Long frameTime, float xpos, float ypos) {
+    public void display(PApplet context, Long frameTime, float xpos, float ypos, float angle) {
+
 
         int frame = (int)Math.floor(( (float)(frameTime % msRunTime)  / (float) msRunTime) * imageCount);
-        context.image(images[frame], xpos, ypos);
+        context.pushMatrix();
+        context.translate(xpos, ypos);
+        context.rotate(angle);
+        context.image(images[frame], -16,-16);
+
+        context.popMatrix();
     }
 
     public int getWidth() {
