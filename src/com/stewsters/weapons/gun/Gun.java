@@ -1,6 +1,6 @@
 package com.stewsters.weapons.gun;
 
-import com.stewsters.Bullet;
+import com.stewsters.physics.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
 import com.stewsters.weapons.gun.attachment.Magazine;

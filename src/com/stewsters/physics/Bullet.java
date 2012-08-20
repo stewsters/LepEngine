@@ -1,4 +1,4 @@
-package com.stewsters;
+package com.stewsters.physics;
 
 import com.stewsters.physics.Game;
 import org.jbox2d.collision.shapes.PolygonShape;

@@ -1,5 +1,6 @@
 package com.stewsters;
 
+import com.stewsters.physics.Bullet;
 import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
 import com.stewsters.physics.Wall;
