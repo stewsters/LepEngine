@@ -12,7 +12,6 @@ public class AnimationManager {
     Animation currentAnimation;
     long animationStartTime = 0l;
     boolean keepLooping = false;
-    float angle = 0;
 
     public AnimationManager(PApplet context, String defaultAnimationName){
         defaultAnimation = AnimationStore.getAnimation(context, defaultAnimationName);
@@ -35,7 +34,7 @@ public class AnimationManager {
         keepLooping = true;
     }
 
-    public void display(PApplet context, int xPos, int yPos){
+    public void display(PApplet context, int xPos, int yPos,float angle){
 
         long animationTime = System.currentTimeMillis() - animationStartTime;
 
@@ -48,8 +47,5 @@ public class AnimationManager {
     }
 
 
-    public void face(float angle){
-        this.angle = angle;
-    }
 
 }
