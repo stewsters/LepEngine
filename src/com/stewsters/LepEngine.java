@@ -1,5 +1,6 @@
 package com.stewsters;
 
+import com.stewsters.graphic.AnimationStore;
 import com.stewsters.physics.Bullet;
 import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
@@ -19,12 +20,12 @@ public class LepEngine extends PApplet {
     public static ArrayList<Wall> walls;
 
     public void setup() {
-
+        AnimationStore.init();
         Game.initialize();
         rectMode(CENTER);
 
         size(Camera.windowSizeX, Camera.windowSizeY);
-        me = new Person();
+        me = new Person(this);
         me.weapon = new SMG();
 
         bullets = new ArrayList<Bullet>();
@@ -52,7 +53,8 @@ public class LepEngine extends PApplet {
 
 
         Vec2 gameCoord = Camera.cameraToGame(new Vec2(mouseX, mouseY));
-//        line(me.body.getPosition().x,me.body.getPosition().y, gameCoord.x,gameCoord.y);
+        Vec2 facing = new Vec2(me.body.getPosition().x - gameCoord.x, me.body.getPosition().y - gameCoord.y);
+        me.rotation = (float)Math.atan2(-facing.x, facing.y);
 
         if (mousePressed) {
             if (mouseButton == LEFT)
@@ -108,7 +110,7 @@ public class LepEngine extends PApplet {
 
         if(key == 'x'){
             println("x pushed");
-            p = new Person();
+            p = new Person(this);
         }
     }
 

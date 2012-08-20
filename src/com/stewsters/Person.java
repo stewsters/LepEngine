@@ -1,5 +1,7 @@
 package com.stewsters;
 
+import com.stewsters.graphic.AnimationManager;
+import com.stewsters.graphic.AnimationStore;
 import com.stewsters.physics.Game;
 import com.stewsters.weapons.Weapon;
 import org.jbox2d.collision.shapes.PolygonShape;
@@ -23,10 +25,16 @@ public class Person {
     float maxSpeed = 50f;
     Vec2 acceleration;
     public Weapon weapon;
-
     float personWidth = 1.f;
 
-    public Person() {
+    float rotation = 0f;
+
+    //visual
+    AnimationManager animationManager;
+
+
+
+    public Person(PApplet context) {
         acceleration = new Vec2(0, 0);
 
         dynamicBodyDef = new BodyDef();
@@ -44,7 +52,7 @@ public class Person {
 
         body.createFixture(dynamicFixDef);
 
-
+        animationManager = new AnimationManager(context, "character/stand");
     }
 
     public void destroy() {
@@ -55,7 +63,9 @@ public class Person {
 
     public void render(PApplet context) {
         context.noStroke();
-        context.rect(body.getPosition().x, body.getPosition().y, personWidth, personWidth);
+
+        animationManager.display(context, body.getPosition().x, body.getPosition().y, rotation);
+//        context.rect(body.getPosition().x, body.getPosition().y, personWidth, personWidth);
     }
 
 

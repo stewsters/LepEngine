@@ -34,7 +34,7 @@ public class AnimationManager {
         keepLooping = true;
     }
 
-    public void display(PApplet context, int xPos, int yPos,float angle){
+    public void display(PApplet context, float xPos, float yPos,float angle){
 
         long animationTime = System.currentTimeMillis() - animationStartTime;
 
