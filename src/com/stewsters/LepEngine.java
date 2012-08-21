@@ -20,7 +20,7 @@ public class LepEngine extends PApplet {
     public static ArrayList<Wall> walls;
 
     public void setup() {
-        AnimationStore.init();
+        AnimationStore.init("/home/bloodred/privatecode/LepEngine/asset/image/animation");
         Game.initialize();
         rectMode(CENTER);
 

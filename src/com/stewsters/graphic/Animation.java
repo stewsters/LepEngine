@@ -6,15 +6,14 @@ import processing.core.PImage;
 import java.io.File;
 
 public class Animation {
-    public static final String baseAnimationDir = "/home/bloodred/privatecode/LepEngine/asset/image/animation";
 
     PImage[] images;
     int imageCount;
 
     public long msRunTime = 1000l; //default is a ms
 
-    public Animation(PApplet context, String imagePrefix) {
-        File animationFolder = new File(baseAnimationDir + File.separator + imagePrefix);
+    public Animation(PApplet context, String animationDir) {
+        File animationFolder = new File( animationDir);
         System.out.println(animationFolder.getAbsolutePath());
         File[] files = animationFolder.listFiles();
 

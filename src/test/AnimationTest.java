@@ -12,7 +12,7 @@ public class AnimationTest extends PApplet {
     public void setup() {
         size(200, 200);
         frameRate(30);
-        AnimationStore.init();
+        AnimationStore.init("/home/bloodred/privatecode/LepEngine/asset/image/animation");
         manager = new AnimationManager(this, "zombie/stand");
 
     }
