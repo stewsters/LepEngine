@@ -12,7 +12,7 @@ public class SemiAutomatic implements Receiver
     boolean chamber = false;
     boolean released = true;
 
-    Magazine magazine = new Magazine(20,20);
+    Magazine magazine = new Magazine(8,0);
 
     @Override
     public boolean cock(){

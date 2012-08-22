@@ -7,7 +7,7 @@ public class Automatic implements Receiver {
 
     boolean cocked = false;
     boolean chamber = false;
-    Magazine magazine = new Magazine(20, 20);
+    Magazine magazine = new Magazine(20, 0);
 
     @Override
     public boolean cock() {
