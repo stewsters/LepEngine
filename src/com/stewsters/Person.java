@@ -25,7 +25,7 @@ public class Person {
     float maxSpeed = 50f;
     Vec2 acceleration;
     public Weapon weapon;
-    float personWidth = 1.f;
+    float personWidth = 2.f;
 
     float rotation = 0f;
 

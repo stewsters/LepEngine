@@ -99,12 +99,16 @@ public class LepEngine extends PApplet {
     public void keyPressed() {
 
         if (key == 'w') {
+            me.animationManager.setAnimation(this,"character/walk",false);
             me.acceleration.y = me.maxSpeed;
         } else if (key == 's') {
+            me.animationManager.setAnimation(this,"character/walk",false);
             me.acceleration.y = -me.maxSpeed;
         } else if (key == 'a') {
+            me.animationManager.setAnimation(this,"character/walk",false);
             me.acceleration.x = -me.maxSpeed;
         } else if (key == 'd') {
+            me.animationManager.setAnimation(this,"character/walk",false);
             me.acceleration.x = me.maxSpeed;
         }
 

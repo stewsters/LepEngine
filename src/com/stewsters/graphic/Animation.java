@@ -32,7 +32,7 @@ public class Animation {
         int frame = (int)Math.floor(( (float)(frameTime % msRunTime)  / (float) msRunTime) * imageCount);
         context.pushMatrix();
         context.translate(xpos, ypos);
-        context.scale(1f/8f);
+        context.scale(1f/4f);
         context.rotate(angle);
         context.image(images[frame], -16,-16);
 
