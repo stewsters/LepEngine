@@ -7,8 +7,8 @@ import com.stewsters.weapons.gun.attachment.Magazine;
 // sa
 public class BoltAction implements Receiver {
 
-    long timeToReload = 500;
-    long lastReloaded = 0;
+//    long timeToReload = 500;
+//    long lastReloaded = 0;
 
 
     boolean cocked = false;
@@ -16,18 +16,18 @@ public class BoltAction implements Receiver {
     boolean triggerReleased = true;
     boolean boltOpen = false;
 
-    Magazine magazine = new Magazine(5, 5);
+    Magazine magazine = new Magazine(5, 0);
 
 
     public boolean openBolt() {
-        long currentTime = System.currentTimeMillis();
-        if (lastReloaded + timeToReload < currentTime) {
+//        long currentTime = System.currentTimeMillis();
+//        if (lastReloaded + timeToReload < currentTime) {
             boltOpen = true;
             cocked = false;
             roundChambered = magazine.removeRound();
-            lastReloaded = currentTime;
+//            lastReloaded = currentTime;
             return true;
-        } else return false;
+//        } else return false;
 
     }
 
@@ -57,12 +57,12 @@ public class BoltAction implements Receiver {
 
     @Override
     public boolean cock() {
-        long currentTime = System.currentTimeMillis();
-        if (lastReloaded + timeToReload < currentTime) {
+//        long currentTime = System.currentTimeMillis();
+//        if (lastReloaded + timeToReload < currentTime) {
             openBolt();
             closeBolt();
             return true;
-        } else return false;
+//        } else return false;
     }
 
     @Override

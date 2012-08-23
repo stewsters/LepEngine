@@ -3,6 +3,8 @@ package test;
 
 import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.Automatic;
+import com.stewsters.weapons.gun.receiver.BoltAction;
+import com.stewsters.weapons.gun.receiver.Revolver;
 import com.stewsters.weapons.gun.receiver.SemiAutomatic;
 import org.junit.Test;
 
@@ -68,13 +70,67 @@ public class ReceiverTests {
 
     @Test
     public void testRevolverReceiver(){
+        Revolver revolver = new Revolver();
 
+        revolver.cock();
+        assert !revolver.fireRound();
+
+        revolver.reload();
+
+        assert !revolver.fireRound(); // not cocked
+
+        revolver.cock();
+
+        assert revolver.fireRound();
+        assert !revolver.fireRound(); //must release trigger
+
+        for(int i = 0; i < 5; i++)
+        {
+            revolver.leftRelease();
+            assert revolver.fireRound();
+        }
+        assert !revolver.fireRound();
 
     }
 
 
     @Test
     public void testBoltActionReceiver(){
+        BoltAction boltAction = new BoltAction();
+        assert !boltAction.fireRound();
+
+        boltAction.openBolt();
+        boltAction.closeBolt();
+        assert !boltAction.fireRound(); //dry fire
+
+        boltAction.openBolt();
+        assert boltAction.insertRound();
+        boltAction.closeBolt();
+        assert !boltAction.fireRound(); //actual fire
+        boltAction.leftRelease();
+
+        boltAction.openBolt();
+        assert boltAction.insertRound();
+        boltAction.closeBolt();
+        assert boltAction.fireRound(); //actual fire
+        boltAction.leftRelease();
+
+        //5 in the clip, 1 in the chamber
+        boltAction.openBolt();
+        assert boltAction.insertRound();
+        assert boltAction.insertRound();
+        assert boltAction.insertRound();
+        assert boltAction.insertRound();
+        assert boltAction.insertRound();
+        assert boltAction.insertRound();
+        boltAction.closeBolt();
+
+        for(int i = 0; i < 6; i++){
+            System.out.println(i);
+            assert boltAction.fireRound();
+            boltAction.leftRelease();
+            boltAction.cock();
+        }
 
 
     }
