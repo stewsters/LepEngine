@@ -6,6 +6,9 @@ import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.prototype.Gun;
 import com.stewsters.weapons.gun.receiver.SemiAutomatic;
 
+/**
+ * This is supposed to represent a Bushmaster AR-15 Semiautomatic Rifle
+ */
 public class AR15 extends Gun implements Weapon {
 
     public AR15() {
