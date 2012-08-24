@@ -19,7 +19,7 @@ public class Automatic implements Receiver {
     }
 
     @Override
-    public void leftRelease() {
+    public void releaseTrigger() {
         //doesnt really matter
     }
 
@@ -31,7 +31,7 @@ public class Automatic implements Receiver {
      * @return
      */
     @Override
-    public boolean fireRound() {
+    public boolean pullTrigger() {
         if (!cocked)
             return false;
 

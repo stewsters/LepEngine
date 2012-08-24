@@ -24,7 +24,7 @@ public class SemiAutomatic implements Receiver
     }
 
     @Override
-    public void leftRelease() {
+    public void releaseTrigger() {
         released = true;
     }
 
@@ -35,7 +35,7 @@ public class SemiAutomatic implements Receiver
      * @return
      */
     @Override
-    public boolean fireRound(){
+    public boolean pullTrigger(){
         if(!released)
             return false;
 

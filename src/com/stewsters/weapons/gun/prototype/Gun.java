@@ -1,4 +1,4 @@
-package com.stewsters.weapons.gun;
+package com.stewsters.weapons.gun.prototype;
 
 import com.stewsters.physics.Bullet;
 import com.stewsters.LepEngine;
@@ -20,7 +20,7 @@ abstract public class Gun {
 
 
     //spawn a bullet 1 unit in front of use traveling in the direction specified by the click
-    public void leftClick(Person holder, float xClick, float yClick) {
+    public void pullTrigger(Person holder, float xClick, float yClick) {
         Vec2 holderPosition = holder.body.getPosition();
 
         if (lastFired + msBetweenShots < System.currentTimeMillis()) {
@@ -29,7 +29,7 @@ abstract public class Gun {
 
             Vec2 diff = new Vec2(xDiff, yDiff);
 
-            if (receiver.fireRound()) {
+            if (receiver.pullTrigger()) {
 
                 Bullet bullet = new Bullet(holderPosition.add(new Vec2(2,2)), diff,muzzleVelocity, bulletRemovalSpeed);
                 LepEngine.bullets.add(bullet);
@@ -40,8 +40,8 @@ abstract public class Gun {
         //remove a bullet from the clip
     }
 
-    public void leftRelease() {
-        receiver.leftRelease();
+    public void releaseTrigger() {
+        receiver.releaseTrigger();
     }
 
 

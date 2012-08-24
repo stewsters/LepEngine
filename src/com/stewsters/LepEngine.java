@@ -5,7 +5,7 @@ import com.stewsters.physics.Bullet;
 import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
 import com.stewsters.physics.Wall;
-import com.stewsters.weapons.gun.*;
+import com.stewsters.weapons.gun.prototype.SMG;
 import org.jbox2d.common.Vec2;
 import processing.core.PApplet;
 
@@ -58,11 +58,11 @@ public class LepEngine extends PApplet {
 
         if (mousePressed) {
             if (mouseButton == LEFT)
-                me.weapon.leftClick(me, gameCoord.x, gameCoord.y);
+                me.weapon.pullTrigger(me, gameCoord.x, gameCoord.y);
             else if (mouseButton == RIGHT)
-                me.weapon.rightClick(me, gameCoord.x, gameCoord.y);
+                me.weapon.reload(me, gameCoord.x, gameCoord.y);
         } else {
-            me.weapon.leftRelease();
+            me.weapon.releaseTrigger();
         }
 
 
@@ -136,7 +136,7 @@ public class LepEngine extends PApplet {
 //    public void mousePressed() {
 //
 //        if (me.weapon != null) {
-//            me.weapon.leftClick(me, mouseX, mouseY);
+//            me.weapon.pullTrigger(me, mouseX, mouseY);
 //        }
 //
 //    }

@@ -16,29 +16,29 @@ public class ReceiverTests {
         Magazine tenRound = new Magazine(10,4);
 
         SemiAutomatic semi = new SemiAutomatic();
-        assert !semi.fireRound(); //cant fire initially
+        assert !semi.pullTrigger(); //cant fire initially
 
         semi.cock();
-        assert !semi.fireRound(); // no bullets
+        assert !semi.pullTrigger(); // no bullets
 
         semi.changeMags(tenRound);
 
-        assert !semi.fireRound(); // uncocked after test fire
+        assert !semi.pullTrigger(); // uncocked after test fire
 
         semi.cock();
 
-        assert semi.fireRound(); //1
-        assert !semi.fireRound(); //must release trigger
+        assert semi.pullTrigger(); //1
+        assert !semi.pullTrigger(); //must release trigger
 
-        semi.leftRelease();
-        assert semi.fireRound(); //2
+        semi.releaseTrigger();
+        assert semi.pullTrigger(); //2
 
-        semi.leftRelease();
-        assert semi.fireRound(); //3
+        semi.releaseTrigger();
+        assert semi.pullTrigger(); //3
 
-        semi.leftRelease();
-        assert semi.fireRound(); //4
-        assert !semi.fireRound(); // out of bullets
+        semi.releaseTrigger();
+        assert semi.pullTrigger(); //4
+        assert !semi.pullTrigger(); // out of bullets
 
     }
 
@@ -50,21 +50,21 @@ public class ReceiverTests {
         Magazine tenRound = new Magazine(maxBullets,maxBullets);
 
         Automatic automatic = new Automatic();
-        assert !automatic.fireRound(); //cant fire initially
+        assert !automatic.pullTrigger(); //cant fire initially
 
         automatic.cock();
-        assert !automatic.fireRound(); // no bullets
+        assert !automatic.pullTrigger(); // no bullets
 
         automatic.changeMags(tenRound);
 
-        assert !automatic.fireRound(); // uncocked after test fire
+        assert !automatic.pullTrigger(); // uncocked after test fire
 
         automatic.cock();
         for(int i =0; i< maxBullets; i++)
         {
-            assert automatic.fireRound(); //1
+            assert automatic.pullTrigger(); //1
         }
-        assert !automatic.fireRound(); // out of bullets
+        assert !automatic.pullTrigger(); // out of bullets
 
     }
 
@@ -73,23 +73,23 @@ public class ReceiverTests {
         Revolver revolver = new Revolver();
 
         revolver.cock();
-        assert !revolver.fireRound();
+        assert !revolver.pullTrigger();
 
         revolver.reload();
 
-        assert !revolver.fireRound(); // not cocked
+        assert !revolver.pullTrigger(); // not cocked
 
         revolver.cock();
 
-        assert revolver.fireRound();
-        assert !revolver.fireRound(); //must release trigger
+        assert revolver.pullTrigger();
+        assert !revolver.pullTrigger(); //must release trigger
 
         for(int i = 0; i < 5; i++)
         {
-            revolver.leftRelease();
-            assert revolver.fireRound();
+            revolver.releaseTrigger();
+            assert revolver.pullTrigger();
         }
-        assert !revolver.fireRound();
+        assert !revolver.pullTrigger();
 
     }
 
@@ -97,23 +97,23 @@ public class ReceiverTests {
     @Test
     public void testBoltActionReceiver(){
         BoltAction boltAction = new BoltAction();
-        assert !boltAction.fireRound();
+        assert !boltAction.pullTrigger();
 
         boltAction.openBolt();
         boltAction.closeBolt();
-        assert !boltAction.fireRound(); //dry fire
-
-        boltAction.openBolt();
-        assert boltAction.insertRound();
-        boltAction.closeBolt();
-        assert !boltAction.fireRound(); //actual fire
-        boltAction.leftRelease();
+        assert !boltAction.pullTrigger(); //dry fire
 
         boltAction.openBolt();
         assert boltAction.insertRound();
         boltAction.closeBolt();
-        assert boltAction.fireRound(); //actual fire
-        boltAction.leftRelease();
+        assert !boltAction.pullTrigger(); //cant fire, trigger not released
+        boltAction.releaseTrigger();
+
+        boltAction.openBolt();
+        assert boltAction.insertRound();
+        boltAction.closeBolt();
+        assert boltAction.pullTrigger(); //actual fire
+        boltAction.releaseTrigger();
 
         //5 in the clip, 1 in the chamber
         boltAction.openBolt();
@@ -126,12 +126,12 @@ public class ReceiverTests {
         boltAction.closeBolt();
 
         for(int i = 0; i < 6; i++){
-            System.out.println(i);
-            assert boltAction.fireRound();
-            boltAction.leftRelease();
+            assert boltAction.pullTrigger();
+            boltAction.releaseTrigger();
             boltAction.cock();
         }
 
+        assert !boltAction.pullTrigger(); // out of ammo
 
     }
 

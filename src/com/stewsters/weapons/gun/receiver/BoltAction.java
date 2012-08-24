@@ -22,11 +22,11 @@ public class BoltAction implements Receiver {
     public boolean openBolt() {
 //        long currentTime = System.currentTimeMillis();
 //        if (lastReloaded + timeToReload < currentTime) {
-            boltOpen = true;
-            cocked = false;
-            roundChambered = magazine.removeRound();
+        boltOpen = true;
+        cocked = false;
+        roundChambered = magazine.removeRound();
 //            lastReloaded = currentTime;
-            return true;
+        return true;
 //        } else return false;
 
     }
@@ -59,14 +59,14 @@ public class BoltAction implements Receiver {
     public boolean cock() {
 //        long currentTime = System.currentTimeMillis();
 //        if (lastReloaded + timeToReload < currentTime) {
-            openBolt();
-            closeBolt();
-            return true;
+        openBolt();
+        closeBolt();
+        return true;
 //        } else return false;
     }
 
     @Override
-    public void leftRelease() {
+    public void releaseTrigger() {
         triggerReleased = true;
     }
 
@@ -78,15 +78,18 @@ public class BoltAction implements Receiver {
      * @return
      */
     @Override
-    public boolean fireRound() {
-        if (!triggerReleased)
+    public boolean pullTrigger() {
+        if (!triggerReleased) {
             return false;
+        }
 
-        if (!cocked)
+        if (!cocked) {
+            triggerReleased = false;
             return false;
-
+        }
         if (!roundChambered) { //click, no ammo fired
             cocked = false;
+            triggerReleased = false;
             return false;
         }
         triggerReleased = false;

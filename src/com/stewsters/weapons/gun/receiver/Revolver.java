@@ -39,7 +39,7 @@ public class Revolver implements Receiver {
     }
 
     @Override
-    public void leftRelease() {
+    public void releaseTrigger() {
         if (released == false) {
             rotateCylinder();
             cocked = true;
@@ -55,7 +55,7 @@ public class Revolver implements Receiver {
      * @return
      */
     @Override
-    public boolean fireRound() {
+    public boolean pullTrigger() {
         if (!released)
             return false;
 

@@ -1,4 +1,4 @@
-package com.stewsters.weapons.gun;
+package com.stewsters.weapons.gun.prototype;
 
 
 import com.stewsters.Person;
@@ -18,7 +18,7 @@ public class Rifle extends Gun implements Weapon {
     }
 
     @Override
-    public void rightClick(Person holder, float xClick, float yClick)
+    public void reload(Person holder, float xClick, float yClick)
     {
         ((BoltAction) receiver).cock();
 
