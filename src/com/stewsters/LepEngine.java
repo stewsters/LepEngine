@@ -5,6 +5,7 @@ import com.stewsters.physics.Bullet;
 import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
 import com.stewsters.physics.Wall;
+import com.stewsters.weapons.gun.common.AR15;
 import com.stewsters.weapons.gun.prototype.SMG;
 import org.jbox2d.common.Vec2;
 import processing.core.PApplet;
@@ -26,7 +27,7 @@ public class LepEngine extends PApplet {
 
         size(Camera.windowSizeX, Camera.windowSizeY);
         me = new Person(this);
-        me.weapon = new SMG();
+        me.weapon = new AR15();
 
         bullets = new ArrayList<Bullet>();
         walls = new ArrayList<Wall>();
