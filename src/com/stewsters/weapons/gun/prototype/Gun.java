@@ -3,13 +3,14 @@ package com.stewsters.weapons.gun.prototype;
 import com.stewsters.physics.Bullet;
 import com.stewsters.LepEngine;
 import com.stewsters.Person;
+import com.stewsters.physics.Game;
 import com.stewsters.weapons.gun.attachment.Magazine;
 import com.stewsters.weapons.gun.receiver.*;
 import org.jbox2d.common.Vec2;
 
 abstract public class Gun {
 
-    public float deviance = 0.1f;
+    public float deviance = 1f;
     public boolean triggerDown = false;
     public Receiver receiver;
     public int msBetweenShots = 500; // 120 rpm
@@ -28,10 +29,13 @@ abstract public class Gun {
             float yDiff = (float) yClick - holderPosition.y;
 
             Vec2 diff = new Vec2(xDiff, yDiff);
-
+            diff.normalize();
             if (receiver.pullTrigger()) {
 
-                Bullet bullet = new Bullet(holderPosition.add(new Vec2(2,2)), diff,muzzleVelocity, bulletRemovalSpeed);
+                Bullet bullet = new Bullet(
+                        holderPosition.add(diff.mul(2f)),
+                        diff.add(new Vec2(deviance*(Game.random.nextFloat() - .5f), deviance*(Game.random.nextFloat() - .5f))),
+                        muzzleVelocity, bulletRemovalSpeed);
                 LepEngine.bullets.add(bullet);
                 lastFired = System.currentTimeMillis();
 

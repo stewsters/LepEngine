@@ -21,11 +21,9 @@ public class Bullet {
     public float bulletWidth = 0.5f;
     public float minFlightSpeedSquared;
 
-    public Bullet(Vec2 startingPos,  Vec2 bulletVelocity,float velocity, float velocityPercentage) {
+    public Bullet(Vec2 startingPos,  Vec2 bulletVelocityNormal, float velocity, float velocityPercentage) {
 
-        bulletVelocity.normalize();
-        bulletVelocity.mulLocal(velocity);
-
+        bulletVelocityNormal.mulLocal(velocity);
 
         dynamicBodyDef = new BodyDef();
         dynamicBodyDef.type = BodyType.DYNAMIC;
@@ -42,7 +40,7 @@ public class Bullet {
         dynamicFixDef.friction = 1f;
 
         body.createFixture(dynamicFixDef);
-        body.setLinearVelocity(bulletVelocity);
+        body.setLinearVelocity(bulletVelocityNormal);
 
         minFlightSpeedSquared = (float)Math.pow((double)(velocity * velocityPercentage), 2.0);
     }

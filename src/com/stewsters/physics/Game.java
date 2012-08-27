@@ -4,6 +4,8 @@ import org.jbox2d.common.Vec2;
 
 import org.jbox2d.dynamics.World;
 
+import java.util.Random;
+
 public class Game {
 
     public static World world;
@@ -11,9 +13,11 @@ public class Game {
     static final int velocityIterations = 6;
     static final int positionIterations = 2;
 
+    public static Random random;
 
     public static void initialize() {
         world = new World(new Vec2(0f, 0f), true);
+        random= new Random();
     }
 
 

@@ -22,13 +22,13 @@ public class LepEngine extends PApplet {
     public static ArrayList<Wall> walls;
 
     public void setup() {
-        AnimationStore.init("/code/LepEngine/asset/image/animation");
+        AnimationStore.init("/home/bloodred/privatecode/LepEngine/asset/image/animation");
         Game.initialize();
         rectMode(CENTER);
 
         size(Camera.windowSizeX, Camera.windowSizeY);
         me = new Person(this);
-        me.weapon = new Shotgun();
+        me.weapon = new SMG();
 
         bullets = new ArrayList<Bullet>();
         walls = new ArrayList<Wall>();
