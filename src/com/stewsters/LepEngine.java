@@ -1,12 +1,10 @@
 package com.stewsters;
 
-import com.stewsters.graphic.AnimationStore;
+import com.stewsters.graphic.AnimationCache;
 import com.stewsters.physics.Bullet;
 import com.stewsters.physics.Camera;
 import com.stewsters.physics.Game;
 import com.stewsters.physics.Wall;
-import com.stewsters.weapons.gun.common.AR15;
-import com.stewsters.weapons.gun.prototype.SMG;
 import com.stewsters.weapons.gun.prototype.Shotgun;
 import org.jbox2d.common.Vec2;
 import processing.core.PApplet;
@@ -22,13 +20,13 @@ public class LepEngine extends PApplet {
     public static ArrayList<Wall> walls;
 
     public void setup() {
-        AnimationStore.init("/home/bloodred/privatecode/LepEngine/asset/image/animation");
+        AnimationCache.init("/home/bloodred/code/LepEngine/asset/image/animation");
         Game.initialize();
         rectMode(CENTER);
 
         size(Camera.windowSizeX, Camera.windowSizeY);
         me = new Person(this);
-        me.weapon = new SMG();
+        me.weapon = new Shotgun();
 
         bullets = new ArrayList<Bullet>();
         walls = new ArrayList<Wall>();

@@ -14,7 +14,7 @@ public class AnimationManager {
     boolean keepLooping = false;
 
     public AnimationManager(PApplet context, String defaultAnimationName){
-        defaultAnimation = AnimationStore.getAnimation(context, defaultAnimationName);
+        defaultAnimation = AnimationCache.getAnimation(context, defaultAnimationName);
         currentAnimation = defaultAnimation;
         animationStartTime = System.currentTimeMillis();
         keepLooping = true;
@@ -22,7 +22,7 @@ public class AnimationManager {
 
 
     public void setAnimation(PApplet context, String animationName, boolean loop){
-        currentAnimation = AnimationStore.getAnimation(context, animationName);
+        currentAnimation = AnimationCache.getAnimation(context, animationName);
         animationStartTime = System.currentTimeMillis();
         keepLooping = loop;
     }

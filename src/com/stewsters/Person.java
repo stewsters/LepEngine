@@ -1,7 +1,6 @@
 package com.stewsters;
 
 import com.stewsters.graphic.AnimationManager;
-import com.stewsters.graphic.AnimationStore;
 import com.stewsters.physics.Game;
 import com.stewsters.weapons.Weapon;
 import org.jbox2d.collision.shapes.PolygonShape;
